@@ -8,7 +8,13 @@ class BooksModel(models.Model):
     author = models.CharField(max_length=255)
     genre = models.CharField(max_length=255)
 
+    class Meta:
+        db_table = 'books'
+
 class ReviewsModel(models.Model):
     book = models.ForeignKey(BooksModel , on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL , on_delete=models.CASCADE) 
     rating = models.PositiveIntegerField(validators=[MaxValueValidator(5) , MinValueValidator(1)])
+
+    class Meta:
+        db_table = 'reviews'
